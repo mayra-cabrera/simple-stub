@@ -4,14 +4,13 @@ require "dashboard"
 describe Dashboard do
   describe "#posts" do
     it "returns posts created today" do
-      create :post, title: "first_today", created_at: Time.now.beginning_of_day
-      create :post, title: "last_today", created_at: Time.now.end_of_day
-      create :post, title: "yesterday", created_at: 1.day.ago.end_of_day
-      dashboard = Dashboard.new(posts: Post.all)
+      posts = double("todays_posts")
+      allow(Dashboard).to receive("todays_posts").and_return(posts)
+      dashboard = Dashboard.new(posts: posts)
 
       result = dashboard.todays_posts
 
-      expect(result.map(&:title)).to match_array(%w(first_today last_today))
+      expect(result).to eq(posts)
     end
   end
 
