@@ -8,9 +8,7 @@ describe Dashboard do
       allow(Post).to receive("today").and_return(posts)
       dashboard = Dashboard.new(posts: Post.all)
 
-      result = dashboard.todays_posts
-
-      expect(result).to eq(posts)
+      expect(dashboard.todays_posts).to eq(posts)
     end
   end
 
