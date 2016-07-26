@@ -5,8 +5,8 @@ describe Dashboard do
   describe "#posts" do
     it "returns posts created today" do
       posts = double("todays_posts")
-      allow(Dashboard).to receive("todays_posts").and_return(posts)
-      dashboard = Dashboard.new(posts: posts)
+      allow(Post).to receive("today").and_return(posts)
+      dashboard = Dashboard.new(posts: Post.all)
 
       result = dashboard.todays_posts
 
